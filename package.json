@@ -1,0 +1,33 @@
+{
+    "name": "noobjs"
+  , "description": "SlideScroll"
+  , "version": "3.0.0"
+  , "private": false
+  , "author": "Jeffj"
+  , "engines": {
+        "node": "0.6.18"
+      , "npm": "1.1.9"
+    }
+  , "scripts": {
+      "start": "./node_modules/.bin/nodemon server.js"
+    }
+  , "dependencies": {
+      "express": "latest"
+    , "jade": "latest"
+    , "mongoose": "latest"
+    , "connect-mongo": "latest"
+    , "connect-flash": "latest"
+    , "passport": "latest"
+    , "passport-local": "latest"
+    , "passport-facebook": "latest"
+    , "passport-twitter": "latest"
+    , "passport-github": "latest"
+    , "passport-google-oauth": "latest"
+    , "imager": "latest"
+    , "underscore": "latest"
+    , "gzippo": "latest"
+    , "async": "latest"
+    , "nodemon": "latest"
+    , "knox": "latest"
+  }
+}
