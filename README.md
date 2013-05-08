@@ -1,9 +1,11 @@
 
-# Slidescroll - A Responsive Web based Presentation deck Viewer
+## Slidescroll - Mobile Presentation Viewer
+
+**Note:** You need to have node.js and mongodb installed and running
 
 [demo](http://slidek.com/)
 
-**Note:** You need to have node.js and mongodb installed and running
+
 ## Install
 ```sh
   $ npm install
