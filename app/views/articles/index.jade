@@ -1,0 +1,131 @@
+extends ../layouts/index
+block main
+
+block content
+
+  if (typeof errors !== 'undefined')
+   .fade.in.alert.alert-block.alert-error(style="text-align:left;", style="margin-top:10px;")
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+      ul
+        each error in errors
+          li!= error.type
+
+  if (typeof messages !== 'undefined')
+   .fade.in.alert.alert-block.alert-success(style="text-align:left;", style="margin-top:10px;")
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+      ul
+        each message in messages
+          li!= message.type
+
+  if (req.user.is_holder && articles.length>0)
+    .container(style="margin-top:10px; padding-bottom:0px;")
+      .fade.in.alert.alert-block.alert-success
+        a.close(data-dismiss="alert", href="javascript:void(0)") x
+        span Update your <strong>username</strong> and <strong>password</strong>.
+        br
+        include updateform
+  else if(!req.user.username && articles.length>0)
+
+    .container(style="margin-top:10px; padding-bottom:0px;")
+      .fade.in.alert.alert-block.alert-success
+        a.close(data-dismiss="alert", href="javascript:void(0)") x
+        span Update your <strong>username</strong> and <strong>password</strong>.
+        br
+        include updateform
+
+
+  form#main-form.well.form-horizontal(  method="post", action="/", enctype="multipart/form-data", style="margin-top:10px; padding-bottom:0px;")
+    h4 Upload New (.pdf) Presentation
+    div(style="margin-top:13px;", style="float:right;")
+      a.toggle(data-toggle="collapse",data-parent,data-parent="#",href="#collapseTwo", style="display:none;")  Customize Link
+      br
+      a.toggle(data-toggle="collapse",data-parent,data-parent="#",href="#collapseThree", onClick="manualLink()")  Manually Enter Source
+    input(type="hidden", name="_method", value="POST")
+    input#input-file(type='file', name="image[]", title="<i class='icon-picture'></i> Choose File", rel="tooltip", data-original-title="first tooltip")
+    span#prompt-upload(data-trigger="manual", data-placement="bottom",data-toggle="popover", data-content="Select a file above and press <b>Start Presenting</b>.", data-original-title='Select a Presentation <button onClick="tutorialModalClose()"style="line-height:15px;",  type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>')
+      |&nbsp; 
+    .btn(style="margin: 5px 5px 5px 0px;")
+      input#dropbox-chooser(type='dropbox-chooser', name='selected-file', style='visibility: hidden;')
+    button.btn.btn-success#start-presenting-fake(type='button',onClick="tutorialModalOpen()",style="font-size:18px;") Start Presenting
+    button.buttonLoad#start-presenting.btn.btn-success( type='submit', style="font-size:18px; display:none") Start Presenting
+    .author#filename
+    #collapseTwo.collapse.input-prepend(style="display:block;")
+      span.add-on(style="font-size:18px; ")=localhost
+      input.input-xxlarge#appendedPrependedInput(style="width:425px; font-size:18px; line-height:25px;", type="text", name="url", value="", placeholder="custom url")
+    br
+    if (filename)
+      input(type="hidden", value=upfilename, name="filename")
+    #collapseThree.collapse.input-prepend(style="display:block;")
+      input#dropbox-input.input-xxlarge( style="font-size:18px; ",type="text", name="link", value=autopost, placeholder="add presentation url here...")
+      a.btn.btn-info(href='#myModal', role='button', data-toggle='modal', style="") 
+        i.icon-info-sign()
+      br
+      br
+  include mymodal
+
+  if (articles.length==0)
+    .fade.in.alert.alert-block.alert-info
+      Strong Upload a deck above! 
+      span No decks added yet.
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+  each article in articles
+    - var m =article.link.split(/\//)
+    .media.article
+      a.pull-left(href='/'+article.url)
+        if (article.imgphone)
+         - var size="imgphone"
+        else
+         - var size="imgfull"
+        if (article.files && article.files.length)
+          img.media-object(data-src='holder.js/64x64', alt='64x64', style='width: 154px;', src="https://s3.amazonaws.com/"+article.s3bucket+"/"+article._id+"/"+size+"/"+article.files[0])
+        else
+          .media-object(style="width: 154px; height:100px; background-color:#eee;")
+        .media-body
+
+          a.btn.pull-right(href='/'+article.url+"/show", title=article.link, style="display:none;")
+            i.icon-signal
+          a.btn.pull-right(href='/'+article.url+"/show", title=article.link)
+            i.icon-info-sign
+          if (article.deactive)
+            .pull-right(style="width: 88px;")
+              include deactive
+          if (article.customUrl)
+            a(href='/'+article.url, title=article.link)
+              h3.media-heading #{article.url}
+          else if (article.filename)
+            a(href='/'+article.url, title=article.link)
+              h3.media-heading=  article.filename
+          else
+            a(href='/'+article.url, title=article.link)
+              h3.media-heading #{m[m.length-1]}
+          input.input-xxlarge.link(value=localhost+article.url,style="font-size:18px;")
+          .author
+            span.time-localize=article.createdAt.getTime()
+            if (article.user && ! article.user!="" )
+             span &nbsp;| Author :&nbsp;
+             a(href="/users/"+article.user._id)=article.user.username
+             | &nbsp;|&nbsp;
+            if (article.tags)
+              span.tags
+                span Tags :&nbsp;
+                each tag in article.tags.split(',')
+                  a.tag(href="/tags/"+tag)
+                    i.icon-tags
+                    |  #{tag}
+          
+          if (article.body)
+           .body   
+            | #{article.body}
+          else
+           .faded
+            | empty
+
+  if (pages > 1)
+    .pagination
+      ul
+        != createPagination(pages, page)
+
+block footscript
+ if (autopost)
+  script
+    !{'autopost="'+autopost+'"'}

@@ -1,0 +1,111 @@
+extends ../layouts/main
+
+block main
+
+block content
+      include masthead
+block contenttwo
+        .jumbotron(style="text-align:left; position:relative; padding-top:10px;")
+         .row-fluid
+          .span6
+            .main-message
+             h1(style="font-size:34px; line-height:42px;")  SlideDecks Made Mobile
+             p.lead
+              | Turn your (.pdf) file into a web presentation with its own link. Show it on any tablet, desktop, or phone. Sync all the viewers' decks to your current slide.    
+              a(href='/demo_presentation?uniqueid='+Math.random()*1000000000000000000,role='button', target="blank", data-toggle='modal') See a demo presentation
+              
+           br
+          .span1
+          .span4
+           .main-message
+                  form(method="post", action="/usersreg",  enctype="multipart/form-data")                     
+                    #collapseone.collapse.input-prepend(style="display:block;")
+                      span(style="font-size:18px;") Choose a .ppt file from Dropbox:
+                      input#dropbox-chooser(type='dropbox-chooser', name='selected-file', style='visibility: hidden;')
+                      #dropbox-filname.pull-right(style="margin-top:-20px;") 
+                      input(type="hidden", name="_method", value="POST")
+                      input.input-xlarge#dropbox-input(value="", autocapitalize="off",autocorrect="off",style="margin:5px 0px 0px; border-radius:4px 4px!important; height:0px; font-size:20px; visibility:hidden; line-height:22px;", type="text", name="url", value="", placeholder="Link to a powerpoint file")
+
+                      div(style="margin-top:-15px; margin-bottom:5px; font-size:18px;") or choose from your computer:
+                      input#input-file(type='file', name="image[]", title="<i class='icon-picture'></i> Choose File", rel="tooltip", data-original-title="first tooltip") 
+                      p#filename(style="font-size:18px;")
+                      br
+                      button#start-presenting.btn.btn-success(style="border-radius:5px; color:#fff;",href='#', type="submit) Start Presenting!
+                      
+
+                    #collapsetwo.in.input-prepend(style="display: block; height: auto;")
+                      br
+                      input.input-xlarge#email-input(value="", autocapitalize="off",autocorrect="off",style="margin:5px 0px 0px; border-radius:4px 4px!important; height:34px; font-size:20px;  line-height:22px;", type="email", name="email", value="", placeholder="Email address")
+                      br
+                      a.lead(href='#myModal',role='button', data-toggle='modal', style="font-size:12px; line-height: 14px; margin:5px 0px 20px; display:none;")  or paste in link to a Powerpoint file
+                      br
+
+                      button#start-presenting.btn.btn-success(style="border-radius:5px; color:#fff;",href='#', type="submit) Start Free Account ->
+
+                      
+                      
+         
+         br
+block contentthree
+
+        .row-fluid.marketing.main-message
+          .span6
+           .media
+            a.pull-left
+              img(src="/img/sync-icon.png", width="64px;")
+            h4.media-heading Sync-Up Slides During Meetings
+            .media-body
+                | Take  viewers to the specific slide you are talking about. Get people on the same page.
+           .media
+            a.pull-left
+              img(src="/img/link-icon.png", width="64px;")
+            h4.media-heading Send a Link, Not a File
+            .media-body
+                | No email attachments. No app to install. No file downloads. End the versioning nightmare.
+           .media
+            a.pull-left
+              img(src="/img/chart-icon.png", width="64px;")
+            h4.media-heading Analytics, Track Views
+            .media-body
+                | See how popular your presentations are with viewers.
+          .span6
+           .media
+            a.pull-left
+              img(src="/img/phone-icon.png", width="64px;")
+            h4.media-heading Mobile and Tablet Optimized
+            .media-body
+                | Slidescroll is built from the ground up for touch devices and a fast mobile experience.
+           .media
+            a.pull-left
+              img(src="/img/trash-icon.png", width="64px;")
+            h4.media-heading Edit/Delete Decks After Sending Them
+            .media-body
+                | Control who sees your deck and change your mind any time.
+           .media
+            a.pull-left
+              img(src="/img/mail-icon.png", width="64px;")
+            h4.media-heading Email Notifications
+            .media-body
+                | Set email alerts to know instantly when your deck is viewed.
+        hr
+block contentfour
+        .footer.main-message
+         .row-fluid
+          .span8.center
+            ul.unstyled.bottomlist
+              li
+                | © Slidescroll 2013
+              li
+                a(href="mailto:contact@slidescroll.com") Contact
+              li
+                a(href="/about") About
+              li
+                a(href="http://blog.slidescroll.com/") Blog
+              li
+                a.twitter-follow-button(href='https://twitter.com/slidescroll', data-show-count='false') Follow @slidescroll
+                script
+                    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+            
+        include mymodal
+

@@ -1,0 +1,84 @@
+extends ../layouts/main
+
+block main
+
+block content
+      include masthead
+
+        if (typeof errors !== 'undefined')
+         .fade.in.alert.alert-block.alert-error(style="text-align:left;")
+            a.close(data-dismiss="alert", href="javascript:void(0)") x
+            ul
+              each error in errors
+                li= error.type 
+         br
+
+      .header
+         h3 The Story
+         h4.strong.author Slidescroll was made to help everyone give great presentation.
+        p
+          |The goal of Slidescroll is to remove all the pain from getting your message to people you need to impress.   It was made to let you <strong> give great presentations any time on any device.</strong>  We built SlideScroll to makes it easier to communicate great ideas.
+
+       br
+
+      p
+        |Slidescroll was developed with support of the San Francisco startup community. The prototype was developed at 
+        a(href="http://www.youtube.com/watch?v=kz_tbAlT-uI") AngelHack 
+        | with feedback and support at 
+        a(href="http://www.StartupHQ.com/") StartupHQ
+        |  and integrates 
+        a(href="http://firebase.com") Firebase's 
+        | real-time data service.
+       hr
+      h3 The Founder
+
+      .row-fluid
+       br
+       .row-fluid
+          .span12
+           .media
+            a.pull-left(href="https://twitter.com/jeffj", target="blank")
+              img.img-rounded(src="/img/jeff-mug.jpeg", width="94px;")
+            .media-body
+              h4(style="margin:0;", target="blank") Jeff Jenkins
+              span.author founder | 
+              a(href="https://twitter.com/jeffj") @jeffj
+              p
+                | Jeff Jenkins (
+                a(href="https:twitter.com/jeffj") @jeffj 
+                | ) a San Francisco based Entrepreneur.  He has been building web products since 2006 and has worked three early stage startups (
+                a(href="http://www.crunchbase.com/company/reframe-it", target="blank") Reframeit
+                | ,&nbsp;
+                a(href="http://topicmarks.com", target="blank") Topicmarks 
+                | and&nbsp;
+                a(href="http://genwi.com", target="blank") GENWI
+                |  ).  When not coding and building products, he reads and competes in amateur boxing. 
+
+        
+      hr
+block contentthree
+      br
+      br
+      br
+      .footer.main-message
+       .row-fluid
+        .span6.center
+          ul.unstyled.bottomlist
+            li
+              | © Slidescroll 2013
+
+            li
+              a(href="mailto:contact@slidescroll.com") Contact
+            li
+              a(href="/about") About
+            li
+              a.twitter-follow-button(href='https://twitter.com/slidescroll', data-show-count='false') Follow @slidescroll
+              script
+                  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+        .span3
+        .span3
+
+          
+      include mymodal
+

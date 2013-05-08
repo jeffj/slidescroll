@@ -1,0 +1,22 @@
+.masthead.main-message
+  ul.nav.nav-pills.pull-right
+    li.active
+      a(href='') Home
+    li
+      a(href='/login') Login
+    li
+      a(href='/signup') Signup
+  a(href="/")
+    img(src="/img/slidescrolltxt.png")
+
+  br
+  br
+  br
+
+  if (typeof errors !== 'undefined')
+   .fade.in.alert.alert-block.alert-error(style="text-align:left;")
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+      ul
+        each error in errors
+          li= error.type 
+   br

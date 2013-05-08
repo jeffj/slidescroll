@@ -1,0 +1,16 @@
+if ( !article.link.match("./parselocation/"))
+  form.form-inline.confirm(action="/"+article.url+"/reload", method="get", style="margin:0px 0px 10px 0px;")
+   input(type="hidden", name="_method", value="GET")
+   button.btn.btn-info(type="submit") Re-parse Deck
+   &nbsp;
+   a.toggle(data-toggle="collapse",data-parent,data-parent="#",href="#collapseOne")
+    i.icon-info-sign
+
+   #collapseOne.collapse
+    .author *Edit your presentation on Dropbox and press re-parse to update your deck. Your can edit your source file <a href="edit">here</a>
+else
+  form.form-inline( method="post", action="reupload", enctype="multipart/form-data")
+    input(type="hidden", name="_method", value="POST")
+    input#input-file( type='file', name="image[]", title="<i class='icon-picture'></i> Choose New File", rel="tooltip", data-original-title="first tooltip") 
+    &nbsp;
+    button#start-presenting.btn.btn-success(style="margin:0px 0px 0px 0px;", href='#', type="submit, ) Upload

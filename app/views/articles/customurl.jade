@@ -1,0 +1,9 @@
+form.form-horizontal(method="post", action="/"+article.url, enctype="multipart/form-data")
+  input(type="hidden", name="_method", value="PUT")
+  .input-append.input-prepend
+   span.add-on(style="font-size:18px; ")=domainVar+"/"
+   input(type="text", name="url", value="", placeholder="Enter a Custom URL")
+   button.btn.btn-primary(href="./") Submit
+   input(type="hidden", name="redirect")
+
+

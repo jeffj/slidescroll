@@ -1,0 +1,50 @@
+extends ../layouts/default
+
+block content
+  - var action = ''
+  if (!article.isNew)
+    - action += '/'+article.url
+
+  if (typeof errors !== 'undefined')
+    .fade.in.alert.alert-block.alert-error
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+      ul
+        each error in errors
+          li= error.type
+
+  .row
+    .span7
+      form.form-horizontal(method="post", action=action, enctype="multipart/form-data")
+        if (!article.isNew)
+          input(type="hidden", name="_method", value="PUT")
+        .control-group
+          label.control-label(for='title') URL
+          .controls
+            .input-prepend(style="display:block;")
+              span.add-on(style="font-size:18px; ")=localhost
+              input#title.input-xxlarge(type='text', name="url", value=article.url, placeholder='Enter the URL')
+        if (article.link.match("/parselocation/")==null)
+          .control-group
+            label.control-label(for='title') Source File
+            .controls
+              input#title.input-xxlarge(type='text', name="link", value=article.link, placeholder='Enter the link')
+              span.author="*changes to the source file  will refresh your deck"
+              br
+
+        .control-group
+          label.control-label(for='desc') Body
+          .controls
+            textarea#desc.input-xxlarge(type='text', rows="5", name="body", placeholder='Enter the article description')=article.body
+
+        .control-group(style="display:none;")
+          label.control-label(for='desc') Tags
+          .controls
+            input#tags(type='text', name="tags", value=article.tags, placeholder='Enter the tags')
+
+        .form-actions(style="background-color:#FFF; border:0px solid;")
+          button.btn.btn-primary(type='submit') Save changes
+          &nbsp;
+          a.btn(href='/'+article.url+"/show", title="cancel") Cancel
+    .span5
+      if (!article.isNew && article.image && article.image.files && article.image.files.length)
+        img(src=article.image.cdnUri + '/mini_' + article.image.files[0])

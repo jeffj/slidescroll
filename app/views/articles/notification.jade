@@ -1,0 +1,14 @@
+form.form-horizontal(method="post", action="/"+article.url, enctype="multipart/form-data")
+  input(type="hidden", name="_method", value="PUT")
+  if (article.emailnotification)
+    input(type="hidden", name="emailnotification", value=false)
+    button.btn.btn-warning(href="./") Turn Off Email Alert
+  else
+    input(type="hidden", name="emailnotification", value="true")
+    button.btn.btn-primary(href="./") Turn On Email Alert
+  input(type="hidden", name="redirect", value=req.url)
+  &nbsp;
+  a.toggle(data-toggle="collapse",data-parent,data-parent="#",href="#collapseTwo")
+   i.icon-info-sign
+  #collapseTwo.collapse
+   .author *An email is sent to the account holder when this deck is viewed by anyone except the account holder.

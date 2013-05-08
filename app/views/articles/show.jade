@@ -1,0 +1,110 @@
+extends ../layouts/default
+
+block main 
+    
+      if (article.customUrl)
+        h1 #{article.url}
+      else if (article.filename)
+        h1 #{article.filename}
+      else
+        - var m =article.link.split(/\//)
+        h1 #{m[m.length-1]}
+
+      input.input-xxlarge.link(value=localhost+article.url, style="font-size:18px;")
+      br
+      br
+      a.btn(href="/")
+        i.icon-home.icon
+      &nbsp;&nbsp;
+      a.btn(href='/'+article.url+'/edit', title="edit") 
+        i.icon-pencil
+      &nbsp;&nbsp;
+      a.btn(href="./")="view deck"
+
+
+block content
+  .row
+    .span9
+      .well
+        .author="body:"
+        p=article.body
+        if (article.user)
+          p.author
+            span Author :&nbsp;
+            a(href="/users/"+article.user._id)=req.user.username
+        p    
+          span.author created: 
+          span.time-localize=article.createdAt.getTime()
+        p
+          span.author="Total Slides: "
+          span=article.files.length
+        if ( !article.link.match("./parselocation/"))
+          p
+            span.author="Source File: "
+            span=article.link
+        if (article.tags)
+          .tags
+            | Tags :&nbsp;
+            each tag in article.tags.split(',')
+              a.tag(href="/tags/"+tag)
+                i.icon-tags
+                |  #{tag}
+  .page-header 
+    h3 Views of Your Deck
+  -var count = analytics.length 
+  - var fullanalytic
+  if (analytics.length)
+   table.table.table-striped
+     thead
+        tr
+          th time
+          th device
+          th Location
+      tbody
+        if (analytics.length>8 && !fullanalytic)
+          - var viewsplice=analytics.splice(analytics.length-6,analytics.length-1).reverse()
+        else 
+         - var viewsplice=analytics.reverse()
+        each view in viewsplice
+          tr
+            td
+              span.time-localize=view.createdAt.getTime()
+            td=view.device
+            if (view.location.city)
+             td=view.location.city+", "+view.location.state+", "+view.location.country+" "
+               a(href="https://maps.google.com/maps?z=12&t=m&q=loc:"+view.location.lat+"+"+view.location.lng) map
+            else
+             td
+      p Total Views: 
+      span=count
+  else
+    .author No Views Yet
+  if (analytics.length && !fullanalytic)
+   a(href=req.url+"?fullanalytic=true") expand list
+
+  .page-header   
+    h3 Options
+  .row
+    .span4(style="border:solid #eee; border-width:0px 0px 1px 0px; padding:10px;")
+        include notification
+    .span4(style="border:solid #eee; border-width:0px 0px 1px 1px; padding:10px;")
+        form.form-inline.confirm(action="/"+article.url, method="post")
+         input(type="hidden", name="_method", value="DELETE")
+         button.btn.btn-danger(type="submit") Delete Presentation
+
+
+  .row
+    .span4(style="border:solid #eee; border-width:0px 0px 0px 0px; padding-top:10px;padding:10px;")
+        include reparse
+    .span4(style="border:solid #eee; border-width:0px 0px 0px 1px; padding-top:10px;padding:10px;")
+        include deactive 
+
+
+    
+
+  p
+    br
+    h2#comments Comments
+    each comment in article.comments
+      include ../comments/comment
+    include ../comments/form

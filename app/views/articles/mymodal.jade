@@ -1,0 +1,25 @@
+#myModal.modal.hide.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+            .modal-body
+              h4 A link to a Powerpoint file goes here.
+                button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+              .modal-body
+                | A <b>.ppt or .pptx</b> file can be obtained from:
+                br
+                br
+                ul.nav.nav-tabs
+                      li.active
+                        a(href='#dropbox', data-toggle='tab') Dropbox
+                      li
+                        a(href='#plainlink', data-toggle='tab') Plain Link
+                      li
+                        a(href='#Google_Drive', data-toggle='tab') Google Drive
+
+              .tab-content
+                  #dropbox.tab-pane.active 
+                    .author Copy this link:
+                    img.img-rounded(src="/img/dbexample.jpg")
+                  #plainlink.tab-pane
+                    .author Copy this link:
+                    img.img-rounded(src="/img/ptexample.jpg")
+                  #Google_Drive.tab-pane
+                    | Comming Soon.

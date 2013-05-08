@@ -1,0 +1,22 @@
+form.form-horizontal(method="post", action="/"+article.url+"/updateactive", enctype="multipart/form-data")
+  input(type="hidden", name="_method", value="PUT")
+  if (req.url.match("/home")!=null)
+   -var redirect ="/"
+  else
+   -var redirect =req.url
+  
+  input(type="hidden", name="redirect", value=redirect)
+  
+  if (article.deactive)
+    input(type="hidden", name="deactive", value=false)
+    button.btn.btn-primary(href="./") Reactivate
+  else
+    input(type="hidden", name="deactive", value="true")
+    button.btn.btn-danger(href="./") Deactivate
+  if (req.url.match("/home")==null)
+    a.toggle(data-toggle="collapse",data-parent,data-parent="#",href="#collapseDeactive", style="margin:5px;")
+      i.icon-info-sign
+
+    #collapseDeactive.collapse
+      .author *Turn off the link for extenal sharing. Once inactive, only the author can view the link.      
+

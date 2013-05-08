@@ -1,0 +1,15 @@
+
+-var user=req.user
+-var emailval
+if (user.email && user.email.match("@@")==null)
+  emailval = user.email
+form.form-inline(action="/users/"+user._id+"/edit", method="post")
+  input(type="hidden", name="_method", value="PUT")
+  .control-group
+    .controls
+      input#username(autocapitalize="off",autocorrect="off",type='text', name="username", placeholder='Username', value=)
+
+  .control-group
+    .controls
+      input#password(autocapitalize="off",autocorrect="off",type='password', name="password", placeholder='Password')
+  button.btn.btn-primary(type='submit') Update Account

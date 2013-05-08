@@ -1,0 +1,152 @@
+extends ../layouts/present
+
+block main
+  if(!parsed)
+    .container(style="position: absolute;")
+      .modal
+          .modal-header
+              h3 Your Presentation Is Loading!
+            .modal-body
+              p We'll be done momentarily...
+                strong 
+                  span#counter-box 3 
+                span="."
+              hr
+
+
+        
+              strong(style="font-size:20px;") 1. Your link is:
+              br
+              input.input-xlarge(type="text",value=localhost+req.url.slice(1), style="width:400px; border:0px; margin-top:5px; font-size:16px;")
+              br
+              a.toggle(style="", data-toggle="collapse",data-parent,data-parent="#", href="#collapseThree") customize...
+                            
+              #collapseThree.collapse  
+                hr
+                strong(style="font-size:20px;")  2. Customize link:
+                  include customurl
+                hr
+                strong(style="font-size:20px;")  3. Get Email Alert :
+                include notification
+
+            .modal-footer
+              .btn-group
+               a.btn.btn-primary(href='') Refresh Page
+              button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown")
+                span.caret
+              .ul.dropdown-menu.pull-right
+               if ( !article.link.match("./parselocation/"))
+                 .li
+                    a.btn(href=article.url+'/reload') re-parse presentation
+
+
+  if(article.broken==true)
+    .container(style="position: absolute;")
+      .modal
+          .modal-header
+              button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+              h3 Something Went Wrong!
+            .modal-body
+              p Your file did not take. Try re-parsing it.
+              a.btn.btn-primary(href=article.url+'/reload') re-parse presentation
+            .modal-footer
+              a.btn(href="/") back
+  #wrapper
+   if(auth)
+     a.pull-right(href="javascript:showpopover();", style="margin:13px 7px 0px 0px; z-index:999;  position:relative;")
+      i.icon-info-sign
+     #mySwitch.pull-right.switch.switch-mini( style="margin:14px 5px;", data-on='', data-off='',data-on-label="&nbsp;&nbsp;&nbsp;&nbsp;SYNCED&nbsp;&nbsp;&nbsp;&nbsp;", data-off-label="&nbsp;UN-SYNCED&nbsp;")
+      input(type='checkbox',checked="checked", data-content="tesy")
+
+     a.pull-right(style="margin:38px -25px;",href='#', rel='popover', data-placement="bottom", data-original-title='&nbsp; Deck Syncing!<i class="icon-lock pull-left"></i>  <a id="modalclose" onClick="syncModalClose()" style="line-height:15px;",  type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>',data-content="Anyone viewing this webpage will see the <b> same slide </b>as you.<br> <br><a href='mailto:?body=Get the Slidescroll presentation at "+localhost+req.url.slice(1)+"&subject=SlideScroll Presentation: "+title+"'>Email this link  to a tablet/phone </a> or <a href='"+req.url+"' target='_blank'> Open in a new window</a>." )
+
+
+   a.left.carousel-control.fader(data-slide="next",  href="#", onClick="gallery.prev()" ,style="z-index:999")
+    &lsaquo;
+   a.right.carousel-control.fader(data-slide="next", href="#", onClick="gallery.next()", style="z-index:999")
+    &rsaquo;
+
+
+   if (type=="phone")   
+      .btn-group.pull-left.fader(style="margin:10px 5px 0px 5px; z-index:999;  position:relative;" )
+       a.btn(href="../")
+        i.icon-home.ico
+       a.btn.dropdown-toggle(data-toggle="dropdown")
+        span.caret
+       ul.dropdown-menu
+        li
+         if(auth)
+          a.btn.fader(href="/"+article.url+"/show", style="margin:10px 5px; z-index:999;  position:relative;" )
+            i.icon-info-sign
+        li(style="margin:6px 0px")
+          script
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          a.twitter-share-button(href='https://twitter.com/share', data-via='slidescroll')
+            |&nbps;
+            |Tweet
+        li(style="margin:8px 0px")
+          #fb-root
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          script
+              (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+              fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));
+          .fb-like(data-send='false', data-layout='button_count', data-width='450', data-show-faces='true')
+        li.center
+          a(href="mailto:?body=Get the Slidescroll presentation at "+localhost+article.url+"&subject=SlideScroll Presentation: "+title) 
+            i.icon-envelope
+            |  Send Email 
+
+    else
+     a.pull-left.btn.fader(href="../", style="margin:10px 5px 0px 10px; z-index:999;  position:relative;" )
+        i.icon-home.icon
+     if(auth)
+      a.pull-left.btn.fader(href="/"+article.url+"/show", style="margin:10px 5px; z-index:999;  position:relative;" )
+        i.icon-info-sign
+     .fader
+      if (type=="desktop")
+       a#scalefull.pull-left.btn(href="#",onClick="scaletoggle()", style="margin:10px 5px; z-index:999;  position:relative;" )
+         i.icon-resize-full
+       a#scaleunfull.pull-left.btn(href="#",onClick="scaletoggle()", style="margin:10px 5px; z-index:999;  position:relative; display:none;",  )
+         i.icon-resize-small
+     .fader.dropdown.pull-left
+      a.dropdown-toggle.btn(data-toggle="dropdown",data-target="#", style="margin:10px 5px; z-index:999;  position:relative;" )
+        i.icon-share
+      ul.dropdown-menu(role="menu", aria-labelledby="dLabel")
+        li(style="margin:6px 0px")
+          script
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          a.twitter-share-button(href='https://twitter.com/share', data-via='slidescroll')
+            |&nbps;
+            |Tweet
+        li(style="margin:8px 0px")
+          #fb-root
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          script
+              (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+              fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));
+          .fb-like(data-send='false', data-layout='button_count', data-width='450', data-show-faces='true')
+        li.center
+          a(href="mailto:?body=Get the Slidescroll presentation at "+localhost+article.url+"&subject=SlideScroll Presentation: "+title) 
+            i.icon-envelope
+            |  Send Email 
+            
+
+
+   select#selector.pull-left.fader.input-mini(style="margin:10px 5px; z-index:999;  position:relative;" )
+    each x, i in slides
+     option=i+1
+
+  script
+    !{'parsed='+parsed+',objID="'+_id+'", auth='+auth+", popover="+popover+", slides="+JSON.stringify(slides)}    
