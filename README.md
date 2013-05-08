@@ -3,16 +3,13 @@
 
 **Note:** You need to have node.js and mongodb installed and running
 
-[demo](http://slidek.com/)
-
+See the demo [here](http://slidek.com/).
 
 ## Install
 ```sh
   $ npm install
   $ npm start
 ```
-
-
 
 **NOTE:** Do not forget to update your sendgrid and S3 credentials to make the prodct parsing work
 
