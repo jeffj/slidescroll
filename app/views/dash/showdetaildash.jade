@@ -1,0 +1,18 @@
+extends ../layouts/default
+
+block main
+	h1=username
+	h1=_id
+	p="total decks: "+count
+	p=user.accountPlan
+	p="Stripe: "+user.stripe_id
+	p="creaed:" +createdAt
+
+	hr
+	each email in articles
+		.page-header
+			p="url: "+email.url
+			p=email._id
+			p=email.link
+			p=formatDate(email.createdAt, "%b %d, %Y at %I:%M %p")
+			a(href="/"+email.url+"/_articledashboard") article details

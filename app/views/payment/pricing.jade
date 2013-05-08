@@ -1,0 +1,44 @@
+extends ../layouts/payment
+
+block main 
+  h2(style="color:#eee; margin: 20px 0px 5px 0px;") Signup for SideScroll Today!
+  .author(style="font-size:18px; margin-bottom:25px;") 15 days free. Cancel any time.
+
+block content
+
+  if (typeof errors !== 'undefined')
+   .fade.in.alert.alert-block.alert-error(style="text-align:left;", style="margin-top:10px;")
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+      ul
+        each error in errors
+          li= error.type
+  if (typeof messages !== 'undefined')
+   .fade.in.alert.alert-block.alert-success(style="text-align:left;")
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+      ul
+        each message in messages
+          li= message.type
+
+  .row-fluid
+    include plans
+
+  .row
+    .span4
+    .span4.center
+      a.btn.btn-success.btn-large(href="/signup") Signup Now ->
+      .author(style="margin-top:5px;") Free plan available.
+block contentfour
+        .footer.main-message
+         .row-fluid
+          .span6.center
+            ul.unstyled.bottomlist
+              li
+                | © Slidescroll 2013
+              li
+                a(href="mailto:contact@slidescroll.com") Contact
+              li
+                a(href="/about") About
+              li
+                a.twitter-follow-button(href='https://twitter.com/slidescroll', data-show-count='false') Follow @slidescroll
+                script
+                    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

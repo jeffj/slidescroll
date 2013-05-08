@@ -1,0 +1,128 @@
+ul.thumbnails
+    li.span3
+    li.span3
+      .thumbnail
+        .caption.thumb(style="background-color:#3CB45B;", data-src='holder.js/300x200', alt='300x200)
+          h3.marketing-point.plan-type 
+            | Free
+          .marketing-point.price
+           strong $0
+           | /month
+          .marketing-point.purpose
+           | Bootstrapper (1 person)
+        .caption(style="border-top:1px solid #eee; margin:0px 0px; ")  
+          .marketing-point.presonum
+            | <strong>5</strong> Active Presentations
+          .marketing-point
+            | <strong>50</strong> Internal Presentions
+          .marketing-point
+            | Customized URLs
+          .marketing-point
+            | Email Alerts and Analytics
+          br
+          p.center
+            if (!req.user)
+             -var link="window.location='/signup'"
+            else
+             -var link="planselect('free');"
+
+            a.btn.btn-primary.btn-large.toggle(data-toggle="",data-parent,data-parent="#", onClick=link, href="#collapseTwo") Select Free
+            br
+            a.btn.btn-info(href='mailto:contact@slidescroll.com?subject=Pricing&nbsp;Question', style="margin-top:10px;") Ask a Question
+    li.span3.shaddow
+      .thumbnail
+        .caption.thumb( style="background-color:#82CAFA;", data-src='holder.js/300x200', alt='300x200')
+          h3.marketing-point.plan-type 
+            | Pro
+          .marketing-point.price
+           strong $15
+           | /month
+          .marketing-point.purpose
+           | Team
+
+        .caption(style="border-top:1px solid #eee; margin:0px 0px;")  
+          .marketing-point.presonum
+            | <strong>Unlimted</strong> Active Presentations
+          .marketing-point
+            | <strong>Unlimited</strong> Internal Presentations
+          .marketing-point
+            | Customized URLs
+          .marketing-point
+            | Email Alerts and Analytics
+          br
+          p.center
+            if (!req.user)
+             -var link="window.location='/signup'"
+            else
+             - var link="planselect('basic');"
+            a.btn.btn-primary.btn-large.toggle(data-toggle="",data-parent,data-parent="#", onClick=link, href="#collapseTwo") Select Pro
+            br
+            a.btn.btn-info(href='mailto:contact@slidescroll.com?subject=Pricing&nbsp;Question', style="margin-top:10px;") Ask a Question
+    if (false)
+     li.span3
+      .thumbnail.shaddow
+        .caption.thumb( data-src='holder.js/300x200', alt='300x200')
+          h3.marketing-point.plan-type 
+            | Premium
+          .marketing-point.price
+           strong $35
+           | /month
+          .marketing-point.purpose
+           | Agile Team (4-7 people)
+
+        .caption(style="border-top:1px solid #eee; margin:0px 0px;")  
+          .marketing-point.presonum
+            | <strong>150</strong> Active Presentations
+          .marketing-point
+            | <strong>Unlimited</strong> Internal Presentations
+          .marketing-point
+            | Customized URLs
+          .marketing-point
+            | Email Alerts and Analytics
+          br
+          p.center
+            if (!req.user)
+             -var link="window.location='/signup'"
+            else
+             - var link="planselect('premium');"
+
+            a.btn.btn-primary.btn-large.toggle(data-toggle="",data-parent,data-parent="#", onClick=link, href="#collapseTwo") Select Premium
+            br
+            a.btn.btn-info(href='mailto:contact@slidescroll.com?subject=Pricing&nbsp;Question', style="margin-top:10px;") Ask a Question
+    if (false)
+     li.span3
+      .thumbnail
+        .caption.thumb(style="background-color:#2c7493;",data-src='holder.js/300x200', alt='300x200')
+          h3.marketing-point.plan-type 
+            | Pro
+          .marketing-point.price
+           strong $55
+           | /month
+          .marketing-point.purpose
+           | Growing Organization (8-25)
+
+        .caption(style="border-top:1px solid #eee; margin:0px 0px;")  
+          .marketing-point.presonum
+            | <strong>250</strong> Active Presentations
+          .marketing-point
+            | <strong>Unlimited</strong> Internal Presentations
+          .marketing-point
+            | Customized URLs
+          .marketing-point
+            | Email Alerts and Analytics
+
+          br
+          p.center
+            if (!req.user)
+             -var link="window.location='/signup'"
+            else
+             - var link="planselect('pro');"
+            a.btn.btn-primary.btn-large.toggle(data-toggle="",data-parent,data-parent="#", onClick=link, href="#collapseTwo") Select Pro
+            br
+            a.btn.btn-info(href='mailto:contact@slidescroll.com?subject=Pricing&nbsp;Question', style="margin-top:10px;") Ask a Question
+if (false)
+ .enterpise
+    | Need an enterprise plan? 
+    a(href='mailto:contact@slidescroll.com?subject=Enterprise&nbsp;Question', style="margin-top:10px;") Contact us.
+
+

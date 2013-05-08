@@ -1,0 +1,35 @@
+extends ../layouts/default
+
+block content
+
+  - action = '/users/'+user._id+'/edit'
+
+  if (typeof errors !== 'undefined')
+    .fade.in.alert.alert-block.alert-error
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+      ul
+        each error in errors
+          li= error.type
+
+  .row
+    .span7
+      form.form-horizontal(method="post", action=action, enctype="multipart/form-data")
+        input(type="hidden", name="_method", value="PUT")
+        .control-group
+          label.control-label(for='title') Username
+          .controls
+            input#title.input-xxlarge(type='text', name="username", value=user.username, placeholder='Enter a Username')
+        .control-group
+          label.control-label(for='title') Email
+          .controls
+            input#title.input-xxlarge(name="email", type='text', name="email", value=user.email, placeholder='Enter a email')
+        .control-group
+          label.control-label(for='title') Password
+          .controls
+            input#title.input-xxlarge(type='password', name="password", value=, placeholder='Enter a password')
+
+        .form-actions(style="background-color:#FFF; border:0px solid;")
+          button.btn.btn-primary(type='submit') Save changes
+          &nbsp;
+          a.btn(href='/users/'+user._id, title="cancel") Cancel
+

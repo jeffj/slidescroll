@@ -1,0 +1,21 @@
+!!! 5
+html(lang='en', xmlns='http://www.w3.org/1999/xhtml', xmlns:fb='https://www.facebook.com/2008/fbml', itemscope='itemscope', itemtype='http://schema.org/Product')
+  include ../includes/head
+  - var autopost
+  if (autopost)
+    -var display="display:none;"
+  else
+    -var display=""
+   body(style=display)
+      .wrapper
+        include ../includes/header
+        .container
+          .row
+            .page-header
+              block main
+            .span12
+              block content
+        .push
+      include ../includes/footer
+      include ../includes/foot
+      block footscript

@@ -1,0 +1,110 @@
+extends ../layouts/payment
+
+block main 
+  h2(style="color:#eee; margin: 20px 0px 5px 0px;") Choose a Plan!
+  .author(style="font-size:18px; margin-bottom:25px;") 15 days free. Cancel any time.
+
+block content
+
+  if (typeof errors !== 'undefined')
+   .fade.in.alert.alert-block.alert-error(style="text-align:left;", style="margin-top:10px;")
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+      ul
+        each error in errors
+          li= error.type
+  if (typeof messages !== 'undefined')
+   .fade.in.alert.alert-block.alert-success(style="text-align:left;")
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+      ul
+        each message in messages
+          li= message.type
+
+  include plans
+  span.pull-right.author(style="margin-top:-1.5em;") Have a 
+    a.toggle(data-toggle="collapse",data-parent,data-parent="#",href="#collapseCoupon") Coupon
+    | ?
+
+  .row-fluid
+    if (req.user.account_standing)
+     - var action="/payment"
+    else
+     .fade.in.alert.alert-block.alert-error(style="text-align:left;", style="margin-top:10px;")
+        a.close(data-dismiss="alert", href="javascript:void(0)") x
+        ul
+         li There is a problem with your card. Please update it.
+     - var action="/payment/editpayment"
+    .span4
+
+    if (req.user.accountPlan=="free")
+     - var freeselect = "true"
+    else if (req.user.accountPlan=="basic")
+     - var smallselect = "true"
+    else if (req.user.accountPlan=="premium")
+     - var mediumselect = "true"
+    else if (req.user.accountPlan=="pro")
+     - var largeselect = "true"
+
+
+  if (req.user.stripe_id==null || req.user.account_standing==false)
+    hr
+    .span4
+    .span4.center
+      span.author="Current acccount type: "
+      span=req.user.accountPlan
+      br
+      #collapseCoupon.collapse
+        form.form-horizontal(method="post", action=action, enctype="multipart/form-data")
+          input(type="hidden", name="_method", value="PUT")
+          select(name="plan")
+                option( value="free", selected=freeselect) free ($0.00/month)
+                option( value="basic", selected=smallselect) Basic ($14.00/month)
+                option( value="premium", selected=mediumselect) Premium ($34.00/month)
+                option( value="pro", selected=largeselect) Pro ($54.00/month)
+          input#title(type='password', name="coupon", value="", placeholder='Coupon', style="margin:5px 0px 5px;")
+          button.btn.input-large.btn-success.input-small#title(type='submit') Submit
+      #collapseTwo.collapse
+        h4 Payment Details
+        form#payment-input.form-horizontal(method="post", action=action, enctype="multipart/form-data")
+          input(type="hidden", name="_method", value="PUT")
+          input#title(type='text', name="name", value="", placeholder='Name', style="margin:5px 0px;")
+          br
+          input#title(type='text', name="number", value="", placeholder='Card Number', style="margin:5px 0px;")
+          br
+          input.input-small#title(type='text', name="month", value="", placeholder='month', style="margin:5px 0px;")
+          &nbsp;
+          span.author /
+          &nbsp;
+          input.input-small#title(type='text', name="year", value="", placeholder='year')
+          if (req.user.account_standing)
+            select(name="plan")
+                option( value="free", selected=freeselect) free ($0.00/month)
+                option( value="basic", selected=smallselect) Basic ($14.00/month)
+                option( value="premium", selected=mediumselect) Premium ($34.00/month)
+                option( value="pro", selected=largeselect) Pro ($54.00/month)
+          br
+          br
+          button.btn.input-large.btn-success.input-small#title(type='submit') Submit
+          .author(style="margin-top:5px;") *You get 15 free days before the first bill.
+
+
+  else
+   hr
+   .span4
+   .span4
+      span.author="Current Plan: "
+      span=req.user.accountPlan
+      br
+      span.author="Account Status: "
+      span="payment current"
+      h4 Change Account Type
+      label.control-label(for='desc') New Account Type:
+      form#payment-input.form-horizontal(method="post", action="/payment/edit", enctype="multipart/form-data")
+        input(type="hidden", name="_method", value="PUT")
+        select(name="plan")
+            option( value="free", selected=freeselect) free ($0.00/month)
+            option( value="basic", selected=smallselect) Basic ($14.00/month)
+            option( value="premium", selected=mediumselect) Premium ($34.00/month)
+            option( value="pro", selected=largeselect) Pro ($54.00/month)
+        br
+        br
+        button.btn.input-large.btn-success.input-small#title(type='submit') Submit

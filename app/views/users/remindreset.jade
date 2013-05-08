@@ -1,0 +1,16 @@
+extends auth
+
+block auth
+  form.login.form-horizontal(action="/remindreset", method="post")
+    .control-group
+      label.control-label(for='email') New Password
+      .controls
+        input#email(autocapitalize="off",autocorrect="off", type='password', name="password", placeholder='password')
+    - var token
+    input#email(autocapitalize="off",autocorrect="off", type='hidden', name="resettoken", value=token, placeholder='password')
+
+    .form-actions
+      button.btn.btn-primary(type='submit') Submit
+      &nbsp;
+      | &nbsp;
+      a(href="/login") login

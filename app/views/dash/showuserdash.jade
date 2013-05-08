@@ -1,0 +1,57 @@
+extends ../layouts/default
+
+block main
+  h1= title
+
+
+
+block content
+  br
+  
+  a(href="/_checkparser") _checkparser
+  br
+  a(href="/_checkunparsed") _checkunparsed
+  br
+  a(href="/_restartoffice") _restartoffice
+  br
+  h4.author="search for a user"
+
+  if (accountPlan=="free")
+   - var freeselect = "true"
+  else if (accountPlan=="basic")
+   - var smallselect = "true"
+  else if (accountPlan=="premium")
+   - var mediumselect = "true"
+  else if (accountPlan=="pro")
+   - var largeselect = "true"
+
+  form.form-inline(action=req.url, method="get")
+    input.input-xlarge(type="text",name="q",  placeholder="email or username")
+
+    select(name="account")
+          option( value="free", selected=freeselect) free ($0.00/month)
+          option( value="basic", selected=smallselect) Basic ($14.00/month)
+          option( value="premium", selected=mediumselect) Premium ($34.00/month)
+          option( value="pro", selected=largeselect) Pro ($54.00/month)
+
+      button.btn.btn-primary(type="submit") search
+    - var count
+  a(href="/_dashboard") Cancel
+
+  if (count)
+  .author="Total User Count: "+count
+  .row
+    .span9
+      each email in users
+        .page-header
+          p=email.email
+          p=email.accountPlan
+          p=formatDate(email.createdAt, "%b %d, %Y at %I:%M %p")
+          a(href="/users/"+email._id+"/_detaildashboard") user details
+
+  
+
+  if (pages > 1)
+    .pagination
+      ul
+        != createPagination(pages, page)

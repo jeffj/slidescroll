@@ -1,0 +1,12 @@
+extends auth
+
+block auth
+  form.login.form-horizontal(action="/remind", method="post")
+    .control-group
+      label.control-label(for='email') Email
+      .controls
+        input#email(autocapitalize="off",autocorrect="off", type='text', name="email", placeholder='Email')
+
+    .form-actions
+      button.btn.btn-primary(type='submit') Submit
+      &nbsp;

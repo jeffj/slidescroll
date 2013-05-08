@@ -1,0 +1,35 @@
+extends ../layouts/default
+
+block main
+  if (article.user.username)
+   h1=article.user.username
+  else
+   h1="no username"
+  br
+  h1=article.user.email
+  br
+  h1="userId: "+article.user._id
+  br
+  h1=article.files
+  br
+  h1=article.createdAt
+  br
+  h1="articleId: "+article._id
+  br
+  a.btn(href="/"+article.url) Preso
+  br
+  br
+  p Run this script on the admin show/edit page to make your edits stick:<br> 
+   input.input-xxlarge(value='$("form").attr("action",$("form").attr("action")+"/_")')
+   
+  a.btn(href="/"+article.url+"/_show") show
+  a.btn(href="/"+article.url+"/_edit") Edit
+  br
+  h1="broken: "+article.broken
+  br
+  h1="customUrl?: "+article.customUrl
+  br
+  h1=article.link
+  br
+  if(!article.link.match("./parselocation/"))
+    a.btn.danger(href="/"+article.url+"/reloadadmin") reloadadmin

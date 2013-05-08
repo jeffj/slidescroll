@@ -1,0 +1,29 @@
+!!! 5
+html(lang='en', xmlns='http://www.w3.org/1999/xhtml', xmlns:fb='https://www.facebook.com/2008/fbml', itemscope='itemscope', itemtype='http://schema.org/Product')
+  include ../includes/head
+  link(rel='stylesheet', href='/css/main.css')
+
+  body(style="background-color:#f8f8f8;")
+    .wrapper(style="background-color:#FFF;")
+      .container-narrow
+          .main-content
+            .main-head
+              block main
+            block content
+    .wrapper(style="background-color:#333; margin-top:-60px")
+      .container-narrow
+          .main-content
+            block contenttwo
+    .wrapper
+      .container-narrow
+          .main-content
+            block contentthree
+    .wrapper
+      .container-narrow
+          .main-content
+            block contentfour
+      .push
+    include ../includes/footer
+    include ../includes/foot
+    include ../includes/dropbox
+    block footscript
