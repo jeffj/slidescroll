@@ -1,0 +1,79 @@
+     body {
+        padding: 0px 0px 40px 0px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 940px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+        color: #eee;
+      }
+      .jumbotron h1 {
+        color: #EEE;
+        -webkit-font-smoothing: antialiased;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      }
+
+      .jumbotron P{
+        color: #878e98;
+        -webkit-font-smoothing: antialiased;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+      .masthead img{
+        width: 200px;
+      }
+      /* Supporting marketing content */
+     /* .marketing {
+        margin: 60px 0;
+      }*/
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+      .backdrop{
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        z-index: -1;
+        margin-top: 20px;
+      }
+     /* .main-message{
+        margin-left:15px;
+      }*/
+      .jumbotron a{
+        color:#f6e916;
+      }
+      .bottomlist>li{
+        float:left;
+        padding: 0px 10px;
+        color:#333;
+      }
+      .bottomlist a{
+        color:#555;
+      }
+      
+      #main-tab{
+        height: 185px;
+      }
+      .file-input-wrapper{
+        font-size: 14px !important;
+        padding: 5px !important;
+        color:black !important;
+        margin-bottom: 10px;
+      }
+      .wrapper {
+padding: 0px 15px;
+}
+

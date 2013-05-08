@@ -1,0 +1,105 @@
+body {
+
+}
+header{
+
+}
+
+.date {
+  color: #ccc;
+}
+
+.author {
+  color: #bbb;
+}
+.link{
+  border:0px;
+  color:#aaa;
+
+}
+.thumb{
+  background-color:#3daae9;
+  border-radius:5px; color:white; 
+  color:#fff !important;
+}
+
+.thumb h3{
+color:white;
+text-shadow: 1px 1px 1px #999;
+}
+.faded{
+  color:#eee;
+}
+
+.price strong{
+text-shadow: 1px 1px 1px #999;
+font-size:34px;
+
+}
+
+.presonum strong{
+
+font-size:25px;
+
+}
+.shaddow{
+  -moz-box-shadow: 3px 7px 10px 3px #ccc;
+  -webkit-box-shadow: 3px 7px 10px 3px #ccc;
+  box-shadow: 3px 7px 10px 3px #ccc;
+}
+
+.purpose{
+
+  margin-top:5px;
+}
+
+.title {
+  padding: 5px 0 15px 0;
+  display: block;
+  font-size: 24px;
+}
+
+.article, .comment {
+  padding: 15px 0;
+  border-top: 1px solid #e8e8e8;
+}
+
+@media only screen and (max-width: 999px) {
+
+
+  /* rules that only apply for canvases narrower than 1000px */
+}
+
+.main-head {
+  text-align: center;
+  padding: 20px;
+}
+
+.btn {
+  outline: none !important;
+}
+
+.center {
+  text-align: center;
+}
+
+.tags {
+  margin-top: 10px;
+}
+
+a.tag {
+  margin: 0 10px 0 0;
+}
+
+.error {
+  color: #FF2602;
+}
+
+.m{
+  margin-top: -10px;
+}
+
+.m input {
+border-radius: 0px 0px 0px 0px;
+}
+

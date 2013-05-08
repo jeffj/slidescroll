@@ -1,0 +1,18 @@
+.dropbox-chooser{
+margin: 11px 5px;	
+}
+.page-header{
+display: none;
+}
+.dropbox-chooser{
+	margin: 0px;
+}
+.file-input-name{
+	display:none;
+}
+#prompt-upload{
+
+}
+.popover{
+	margin-top:20px !important;
+}
