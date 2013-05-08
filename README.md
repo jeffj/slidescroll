@@ -1,11 +1,16 @@
 
-[Slidescroll - A Responsive Web based Presentation deck Viewer](http://slidek.com/)
+# Slidescroll - A Responsive Web based Presentation deck Viewer
+
+[demo](http://slidek.com/)
+
 **Note:** You need to have node.js and mongodb installed and running
 ## Install
 ```sh
   $ npm install
   $ npm start
 ```
+
+
 
 **NOTE:** Do not forget to update your sendgrid and S3 credentials to make the prodct parsing work
 
