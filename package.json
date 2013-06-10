@@ -27,6 +27,5 @@
     , "gzippo": "latest"
     , "async": "latest"
     , "nodemon": "latest"
-    , "knox": "latest"
   }
 }
